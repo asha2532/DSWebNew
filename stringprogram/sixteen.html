@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        #include&ltstdio.h&gt
+            void sortString(char str[])
+            {
+                int i,j,temp;
+                int n=0;
+                
+                while(str[n]!='\0')
+                {
+                    n++;
+                }
+                
+                for(i=0;i<n-1;i++)
+                {
+                   for(j=i+1;j<n;j++)
+                   {
+                       if(str[i]>str[j])
+                       {
+                        temp=str[i];
+                        str[i]=str[j];
+                        str[j]=temp;
+                       }
+                    }
+                }
+            }
+            int main()
+            {
+                char str[100];
+                printf("enter a string:");
+                scanf("%s",str);
+                sortString(str);
+                printf("sorted string:%s\n",str);
+                
+                return 0;
+            }
+            OUTPUT:
+            enter a string:beautiful
+            sorted string:abefiltuu
+    </pre>
+</body>
+</html>

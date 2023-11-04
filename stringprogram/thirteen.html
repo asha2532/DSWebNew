@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        #include&ltstdio.h&gt
+            int isVowel(char ch)
+            {
+                ch=tolower(ch);
+                return(ch=='a'|| ch=='e'|| ch=='i'|| ch=='o'|| ch=='u');
+            }
+            int countVowel(char str[])
+            {
+                int count=0;
+                int i=0;
+                printf("vowwel in the string:");
+                while(str[i]!='\0')
+                {
+                    if(isVowel(str[i]))
+                    {
+                        count++;
+                    }
+                    i++;
+                }
+                return count;
+            }
+            int main()
+            {
+                char str[100];
+                printf("enter a string:");
+                scanf("%s",str);
+             int vowelcount=countVowel(str);
+             printf("number pf vowe in strings:%d\n",vowelcount);
+                
+                return 0;
+            }
+            OUTPUT:
+            enter a string:beautiful
+              vowwel in the string:number of vowe in strings:5
+
+    </pre>
+</body>
+</html>

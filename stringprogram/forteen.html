@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        #include&ltstdio.h&gt
+            int stringToInteger(char *str)
+            {
+                int result=0;
+                int sign=1;
+                int i=0;
+                if(str[0]=='-')
+                {
+                    sign=-1;
+                    i=1;
+                }
+                while(str[i]!='\0')
+                {
+                    result=result*10+(str[i]-'0');
+                    i++;
+                }
+                return sign*result;
+            }
+            int main()
+            {
+                char str[100];
+                printf("enter a string:");
+                scanf("%s",str);
+                
+                int intvalue=stringToInteger(str);
+                printf("integer value:%d\n",intvalue);
+                
+                return 0;
+            }
+            OUTPUT:
+            enter a string:beautiful
+            integer value:1291675854
+    </pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        #include&ltstdio.h&gt
+            int stringToFloat(char *str)
+            {
+                int result=0.0;
+                int sign=1.0;
+                int i=0;
+                if(str[0]=='-')
+                {
+                    sign=-1.0;
+                    i=1;
+                }
+                while(str[i]!='\0' && str[i]!='.')
+                {
+                    result=result*10.0+(str[i]-'0');
+                    i++;
+                }
+                if(str[i]=='.')
+                {
+                    float fraction=0.1;
+                    i++;
+                    
+                    while(str[i]!='\0')
+                {
+                    result=result+(str[i]-'0');
+                    i++;
+                }
+                }
+                return sign*result;
+            }
+            int main()
+            {
+                char str[100];
+                printf("enter a string:");
+                scanf("%s",str);
+                
+                float  floatvalue=stringToFloat(str);
+                printf("float value:%f\n",floatvalue);
+                
+                return 0;
+            }
+            OUTPUT:
+            nter a string:beautifu
+            float value:558664320.000000
+    </pre>
+</body>
+</html>

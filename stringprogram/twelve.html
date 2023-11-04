@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        #include&ltstdio.h&gt
+
+
+            void reverseCopy(char str1[],char str2[])
+            {
+                int length=0;
+                while(str1[length]!='\0')
+                {
+                    length++;
+                }
+                for (int i=0;i<length;i++)
+                {
+                    str2[i]=str1[length-1-i];
+                }
+                str2[length]='\0';
+            }
+            int main()
+            {
+                char str1[]="hello";
+                char str2[6];
+                reverseCopy(str1,str2);
+                printf("original strings:%s\n",str1);
+                printf("reversed string:%s\n",str2);
+                
+                return 0;
+            }
+            OUTPUT:
+            original strings:hello
+             reversed string:olleh
+    </pre>
+</body>
+</html>
