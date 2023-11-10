@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        
+#include &lt stdio.h &gt
+#include &lt stdbool.h &gt
+
+// Function to create Adjacency Matrix
+void createAdjMatrix(int N,int Adj[][N + 1], 
+int arr[][2], int M) {
+// Initialize all values in the adjacency matrix to 0
+    for (int i = 0; i < N + 1; i++) {
+        for (int j = 0; j < N + 1; j++) {
+            Adj[i][j] = 0;
+        }
+    }
+
+  // Traverse the array of edges
+  for (int i = 0; i < M; i++) {
+        int x = arr[i][0];
+        int y = arr[i][1];
+
+ // Update the values in the adjacency matrix
+        Adj[x][y] = 1;
+        Adj[y][x] = 1;
+    }
+}
+
+// Function to perform Depth-First Search 
+(DFS) traversal
+void dfs(int N,int Adj[][N + 1], int vertex, 
+bool visited[]) {
+    // Mark the current vertex as visited
+    visited[vertex] = true;
+    printf("%d ", vertex);
+
+    // Traverse all adjacent vertices
+    for (int i = 1; i <= N; i++) {
+    if (Adj[vertex][i] == 1 && !visited[i]) {
+            dfs(N,Adj, i, visited);
+        }
+    }
+}
+
+// Function to initiate DFS traversal
+void dfsTraversal(int N,int Adj[][N + 1]) {
+    bool visited[N + 1];
+    for (int i = 1; i <= N; i++) {
+        visited[i] = false;
+    }
+
+//Perform DFS traversal from each unvisited vertex
+    for (int i = 1; i <= N; i++) {
+        if (!visited[i]) {
+            dfs(N,Adj, i, visited);
+        }
+    }
+}
+
+int main() {
+    int N, M;
+
+    // Input the number of vertices
+    printf("Enter the number of vertices: ");
+    scanf("%d", &N);
+
+    // Given Edges
+    printf("Enter the number of edges: ");
+    scanf("%d", &M);
+
+    int arr[M][2];
+
+    for (int i = 0; i < M; i++) {
+    printf("Enter edge %d (start end): ", i + 1);
+    scanf("%d %d", &arr[i][0], &arr[i][1]);
+    }
+
+    // For Adjacency Matrix
+    int Adj[N + 1][N + 1];
+
+    // Function call to create Adjacency Matrix
+    createAdjMatrix(N,Adj, arr, M);
+
+    // Print the Adjacency Matrix
+    printf("Adjacency Matrix:\n");
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= N; j++) {
+            printf("%d ", Adj[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("Depth-First Search (DFS) Traversal: ");
+    dfsTraversal(N,Adj);
+
+    return 0;
+}
+OUTPUT:
+Enter the number of vertices: 4
+Enter the number of edges: 4
+Enter edge 1 (start end): 1 2
+Enter edge 2 (start end): 2 3
+Enter edge 3 (start end): 3 4
+Enter edge 4 (start end): 4 1
+Adjacency Matrix:
+0 1 0 1 
+1 0 1 0 
+0 1 0 1 
+1 0 1 0 
+Depth-First Search (DFS) Traversal: 1 2 3 4
+    </pre>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        
+#include < stdio.h >
+#include < stdlib.h >
+#define MAX_SIZE 100
+int createNode(int key, int left, int right, 
+int tree[][3], int* nextIndex) {
+    int newNode = (*nextIndex)++;
+    // Store the key
+    tree[newNode][0] = key;  
+    // Store the left child index
+    tree[newNode][1] = left; 
+    // Store the right child index
+    tree[newNode][2] = right; 
+    return newNode;
+}
+void preOrder(int root, int tree[][3]) {
+    if (root != -1) {
+        printf("%d ", tree[root][0]); 
+        preOrder(tree[root][1], tree); 
+        preOrder(tree[root][2], tree); 
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int preorder[n];
+    printf("Enter the elements in preorder: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &preorder[i]);
+    }
+
+ // Initialize the binary search tree array
+    int bst[MAX_SIZE][3];
+    for (int i = 0; i < MAX_SIZE; i++) {
+//Initialize key to -1, indicating an empty node
+        bst[i][0] = -1;
+        // Initialize left child index to -1
+        bst[i][1] = -1; 
+        // Initialize right child index to -1
+        bst[i][2] = -1; 
+    }
+
+    int nextIndex = 0;
+    int root = createNode(preorder[0], -1, -1, 
+    bst, &nextIndex); // Create the root node
+
+    int current = root;
+    for (int i = 1; i < n; i++) {
+    createNode(preorder[i], -1, -1, bst, 
+    &nextIndex); // Create a node
+
+    while (1) {
+    if (preorder[i] < bst[current][0]) {
+    if (bst[current][1] == -1) {
+    bst[current][1] = i;
+       break;
+    } else {
+    current = bst[current][1];
+       }
+     } else {
+    if (bst[current][2] == -1) {
+    bst[current][2] = i;
+       break;
+    } else {
+    current = bst[current][2];
+                }
+            }
+        }
+ // Reset current to the root for the 
+  next insertion
+    current = root; 
+    }
+    printf("Pre-order traversal of the 
+    binary search tree: ");
+    preOrder(root, bst);
+    printf("\n");
+
+    return 0;
+} 
+OUTPUT:
+Enter the number of elements: 13
+Enter the elements in preorder: 
+100 90 80 70 85 95 98 
+96 110 105 108 120 130
+Pre-order traversal of the binary search tree: 
+100 90 80 70 85 95 98 
+96 110 105 108 120 130
+    </pre>
+</body>
+</html>

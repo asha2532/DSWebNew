@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>code</title>
+</head>
+<body>
+    <pre>
+        
+#include < stdio.h >
+#include < stdlib.h >
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Graph {
+  // Number of vertices    
+  int V;  
+  // Array of adjacency lists
+  struct Node** adjList;  
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)
+   malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to create a graph with 'V' vertices
+struct Graph* createGraph() {
+    struct Graph* graph = (struct Graph*)
+    malloc(sizeof(struct Graph));
+    graph->V = 0;
+    graph->adjList = NULL;
+
+    return graph;
+}
+
+// Function to add a vertex to the graph
+void addVertex(struct Graph* graph) {
+    graph->V++;
+    graph->adjList = (struct Node*)realloc
+   (graph->adjList, graph->V * sizeof(struct Node));
+    graph->adjList[graph->V - 1] = NULL;
+}
+
+// Function to add an edge from vertex 'src' to 
+vertex 'dest'
+void addEdge(struct Graph*graph,int src,int dest) {
+    struct Node* newNode = createNode(dest);
+    newNode->next = graph->adjList[src];
+    graph->adjList[src] = newNode;
+}
+
+// Function to remove an edge from vertex 'src' to 
+vertex 'dest'
+void removeEdge(struct Graph*graph,int src,int dest) {
+    struct Node* current = graph->adjList[src];
+    struct Node* prev = NULL;
+
+    while (current != NULL) {
+    if (current->data == dest) {
+      if (prev != NULL) {
+       prev->next = current->next;
+        } else {
+     graph->adjList[src] = current->next;
+            }
+            free(current);
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+}
+
+// Function to print the adjacency list of the graph
+void printGraph(struct Graph* graph) {
+    for (int i = 0; i < graph->V; i++) {
+        struct Node* current = graph->adjList[i];
+        printf("Adjacency list of vertex %d: ", i);
+        while (current) {
+            printf("%d -> ", current->data);
+            current = current->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+int main() {
+    struct Graph* graph = createGraph();
+
+    int choice, src, dest;
+    while (1) {
+        printf("\nChoose an operation:\n");
+        printf("1. Add Vertex\n");
+        printf("2. Insert Edge\n");
+        printf("3. Delete Edge\n");
+        printf("4. Print Graph\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+ switch (choice) {
+ case 1:
+ addVertex(graph);
+ printf("Vertex added with index %d.\n", graph->V - 1);
+       break;
+ case 2:
+ printf("Enter source and destination: ");
+ scanf("%d %d", &src, &dest);
+ if (src >= 0 && src < graph->V && dest >= 0 
+ && dest < graph->V) {
+ addEdge(graph, src, dest);
+ printf("Edge (%d, %d) inserted.\n", src, dest);
+ } else {
+ printf("Invalid vertices. Please re-enter.\n");
+ }
+        break;
+ case 3:
+ printf("Enter source and destination: ");
+ scanf("%d %d", &src, &dest);
+ if (src >= 0 && src < graph->V && dest >= 0 && 
+ dest < graph->V) {
+ removeEdge(graph, src, dest);
+ printf("Edge (%d, %d) deleted.\n", src, dest);
+ } else {
+ printf("Invalid vertices. Please re-enter.\n");
+ }
+        break;
+ case 4:
+ printGraph(graph);
+        break;
+ case 5:
+ printf("Exiting the program.\n");
+        return 0;
+ default:
+ printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+} 
+OUTPUT:
+Choose an operation:
+1. Add Vertex
+2. Insert Edge
+3. Delete Edge
+4. Print Graph
+5. Exit
+Enter your choice: 1
+Vertex added with index 0.
+
+Choose an operation:
+1. Add Vertex
+2. Insert Edge
+3. Delete Edge
+4. Print Graph
+5. Exit
+Enter your choice: 1
+1Vertex added with index 1.
+    </pre>
+</body>
+</html>
